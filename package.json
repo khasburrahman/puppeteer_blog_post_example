@@ -1,29 +1,25 @@
 {
-  "name": "puppeteer_blog_post_example",
-  "version": "1.0.0",
-  "description": "A simple web app to test using puppeteer",
-  "main": "index.js",
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-scripts": "2.1.5"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/khasburrahman/puppeteer_blog_post_example.git"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "keywords": [
-    "puppeteer",
-    "jest",
-    "react"
-  ],
-  "author": "kharis khasburrahman",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/khasburrahman/puppeteer_blog_post_example/issues"
-  },
-  "homepage": "https://github.com/khasburrahman/puppeteer_blog_post_example#readme",
-  "devDependencies": {
-    "create-react-app": "^2.1.5",
-    "jest": "^24.1.0",
-    "puppeteer": "^1.12.2"
-  }
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
