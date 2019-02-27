@@ -19,7 +19,7 @@ class App extends Component {
       let {todos, todoInput, currentId} = state
       
       if (todoInput === undefined || todoInput === "" || todoInput === null){
-        alert("Really, don't you have anything to do?\nPen jalan jalan sama aku?")
+        alert("Really, don't you have anything to do?\nAllright, just write \"I want to rule the world\" and you'll be fine")
         return
       }
 
