@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import TodoInput from './component/todo.input'
 import TodoContent from './component/todo.content'
+import TodoDelete from './component/todo.delete.button'
 
 class App extends Component {
   state = {
     todos: [],
     todoInput: "",
+    currentId: 0,
   }
 
   todoSetInput = (value) => {
@@ -14,23 +16,48 @@ class App extends Component {
 
   todoSubmit = () => {
     this.setState((state, props) => {
-      let {todos, todoInput} = state
-      todos.push(todoInput)
+      let {todos, todoInput, currentId} = state
+      
+      if (todoInput === undefined || todoInput === "" || todoInput === null){
+        alert("Really, don't you have anything to do?\nPen jalan jalan sama aku?")
+        return
+      }
+
+      let todo = {
+        id:currentId, 
+        content:todoInput
+      }
+      currentId += 1
+      todos.push(todo)
       return {
         todos: [...todos],
-        todoInput: ""
+        todoInput: "",
+        currentId
       }
+    })
+  }
+
+  todoDeleteItem = (index) => {
+    this.setState((state, props) => {
+      let {todos} = state
+      todos.splice(index, 1)
+      return {todos:[...todos]}
     })
   }
 
   render() {
     let { todoInput, todos } = this.state
     return (
-      <div className="App">
+      <div id="app">
         <TodoInput todoInputValue={todoInput} todoSubmit={this.todoSubmit} todoSetInput={this.todoSetInput} />
-        <div>
+        <div id="todos-container">
           {
-            todos.map((content, index) =>  <TodoContent key={index+content} content={content}/>)
+            todos.map((data, index) => 
+              <div key={data.id} style={{display:"flex", marginTop:"8px"}}>
+                <TodoContent todo={data} />
+                <TodoDelete index={index} deleteHandler={this.todoDeleteItem} />
+              </div>
+            )
           }
         </div>
       </div>
