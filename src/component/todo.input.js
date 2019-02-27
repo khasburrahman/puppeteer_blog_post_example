@@ -21,7 +21,7 @@ class TodoInput extends Component {
                     data-testid="todo-form-input" 
                     onChange={this.handleChange} 
                     value={todoInputValue}/>
-                <button onClick={this.submit}>Submit</button>
+                <button name="todo-button-submit" data-testid="todo-button-submit" onClick={this.submit}>Submit</button>
             </div>
         );
     }
