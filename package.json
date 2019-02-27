@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://khasburrahman.github.io/puppeteer_blog_post_github_pages/",
   "dependencies": {
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
@@ -10,8 +11,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "jest --setupFiles dotenv/config --runInBand --verbose",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -24,6 +27,7 @@
   ],
   "devDependencies": {
     "dotenv": "^6.2.0",
+    "gh-pages": "^2.0.1",
     "jest": "^24.1.0",
     "puppeteer": "^1.12.2"
   }
