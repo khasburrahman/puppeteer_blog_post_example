@@ -15,7 +15,12 @@ class TodoInput extends Component {
         return (
             <div>
                 <h2>Input Todo:</h2>
-                <input onChange={this.handleChange} value={todoInputValue}></input>
+                <input 
+                    style={{width:"40%"}} 
+                    name="todo" 
+                    data-testid="todo-form-input" 
+                    onChange={this.handleChange} 
+                    value={todoInputValue}/>
                 <button onClick={this.submit}>Submit</button>
             </div>
         );
