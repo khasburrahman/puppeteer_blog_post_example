@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/puppeteer_blog_post_github_example/precache-manifest.2225f976915a5d3a664466a0576df49a.js"
+  "/puppeteer_blog_post_example/precache-manifest.f439c395d3310005e8b6f3324359696c.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/puppeteer_blog_post_github_example/index.html", {
+workbox.routing.registerNavigationRoute("/puppeteer_blog_post_example/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

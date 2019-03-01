@@ -1,11 +1,11 @@
 {
-  "main.js": "/puppeteer_blog_post_github_example/static/js/main.48b6219b.chunk.js",
-  "main.js.map": "/puppeteer_blog_post_github_example/static/js/main.48b6219b.chunk.js.map",
-  "runtime~main.js": "/puppeteer_blog_post_github_example/static/js/runtime~main.d290ca15.js",
-  "runtime~main.js.map": "/puppeteer_blog_post_github_example/static/js/runtime~main.d290ca15.js.map",
-  "static/js/2.227790b2.chunk.js": "/puppeteer_blog_post_github_example/static/js/2.227790b2.chunk.js",
-  "static/js/2.227790b2.chunk.js.map": "/puppeteer_blog_post_github_example/static/js/2.227790b2.chunk.js.map",
-  "index.html": "/puppeteer_blog_post_github_example/index.html",
-  "precache-manifest.2225f976915a5d3a664466a0576df49a.js": "/puppeteer_blog_post_github_example/precache-manifest.2225f976915a5d3a664466a0576df49a.js",
-  "service-worker.js": "/puppeteer_blog_post_github_example/service-worker.js"
+  "main.js": "/puppeteer_blog_post_example/static/js/main.2c9bb41e.chunk.js",
+  "main.js.map": "/puppeteer_blog_post_example/static/js/main.2c9bb41e.chunk.js.map",
+  "runtime~main.js": "/puppeteer_blog_post_example/static/js/runtime~main.31c9062f.js",
+  "runtime~main.js.map": "/puppeteer_blog_post_example/static/js/runtime~main.31c9062f.js.map",
+  "static/js/2.227790b2.chunk.js": "/puppeteer_blog_post_example/static/js/2.227790b2.chunk.js",
+  "static/js/2.227790b2.chunk.js.map": "/puppeteer_blog_post_example/static/js/2.227790b2.chunk.js.map",
+  "index.html": "/puppeteer_blog_post_example/index.html",
+  "precache-manifest.f439c395d3310005e8b6f3324359696c.js": "/puppeteer_blog_post_example/precache-manifest.f439c395d3310005e8b6f3324359696c.js",
+  "service-worker.js": "/puppeteer_blog_post_example/service-worker.js"
 }
