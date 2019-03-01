@@ -1,16 +1,22 @@
 const puppeteer = require('puppeteer')
 
-describe('Todo module test ', () => {
-    let page;
-    let browser;
-    const width = 1280;
-    const height = 720;
+/**
+ * probably a test shouldn't be organized like this, idk ._.
+ * it's just a demonstration
+ */
+describe('Test the Todo Module', () => {
+    let page, browser;
 
     beforeAll(async () => {
         jest.setTimeout(30000)
+        let {PUPPETEER_SLOWMO, PUPPETEER_HEADLESS, PUPPETEER_WIDTH, PUPPETEER_HEIGHT} = process.env
+        let width = parseInt(PUPPETEER_WIDTH)
+        let height = parseInt(PUPPETEER_HEIGHT)
+        let headless = PUPPETEER_HEADLESS === 'true'
+        
         browser = await puppeteer.launch({
-            headless: false,
-            slowMo: 10,
+            headless,
+            slowMo: PUPPETEER_SLOWMO,
             args: [`--window-size=${width},${height}`]
         })
         page = await browser.newPage()
@@ -22,13 +28,47 @@ describe('Todo module test ', () => {
         browser.close()
     })
 
+    test("It Can Add Todo", async () => {
+        let todoText = "Can I put my todo here?"
+        //click and type to the todo form
+        let todoForm = await page.waitForSelector('input[name="todo"]')
+        await todoForm.click()
+        await page.keyboard.type(todoText)
+        //submit the text
+        let submitButton = await page.waitForSelector('button[name="todo-button-submit"]')
+        await submitButton.click()
+        //check if it is rendered correctly
+        let firstTodoItemHandle = await page.waitForSelector(`#todos-container > div:nth-child(1) > div > p`)
+        let firstTodoItemContent = await page.evaluate(todoItem => todoItem.innerHTML, firstTodoItemHandle)
+        expect(firstTodoItemContent).toBe(todoText)
+    }, 5000)
+    
+    test("It Can Delete Todo", async () => {
+        //tell js to wait for the element to be hidden, but don't use await
+        let waitForTheFirstTodoDisappear = page.waitForSelector(`#todos-container > div:nth-child(1) > div > p`, {hidden:true})
+        //click the button
+        let buttonSelector = await page.waitForSelector(`#todos-container > div:nth-child(1) > button`)
+        await buttonSelector.click()
+        //wait the element to be hidden
+        await waitForTheFirstTodoDisappear
+    }, 5000)
 
-    test("A demonstration of automation testing", async () => {
-        /**
-         * really the test shouldn't be organized like this test ._.
-         * it's just a demonstration
-         */
+    test("It shows alert when input is empty", async () => {
+        async function checkAlertDialog (dialog) {
+            let message = await dialog.message()
+            let isTheAlertDisplayCorrectly = message.includes("Really, don't you have anything to do?")
+            expect(isTheAlertDisplayCorrectly).toBeTruthy()
+            await dialog.accept()
+        }
 
+        page.on('dialog', checkAlertDialog)
+        let buttonSelector = await page.waitForSelector(`button[name="todo-button-submit"]`)
+        await buttonSelector.click()
+        page.removeListener('dialog', checkAlertDialog)
+    }, 3000)
+
+    test("It Can Add and Delete the Todo Many Times", async () => {
+        
         let addedTodos = []
 
         /**
@@ -50,9 +90,11 @@ describe('Todo module test ', () => {
          */
         async function inputToTodo(todoItems) {
             for (let value of todoItems) {
-                await page.click('input[name="todo"]')
+                let todoForm = await page.waitForSelector('input[name="todo"]')
+                await todoForm.click()
                 await page.keyboard.type(value)
-                await page.click('button[name="todo-button-submit"]')
+                let submitButton = await page.waitForSelector('button[name="todo-button-submit"]')
+                await submitButton.click()
                 addedTodos.push(value)
                 await isTodoItemsCorrectlyRendered(addedTodos)
             }
@@ -65,9 +107,8 @@ describe('Todo module test ', () => {
          */
         async function deleteTodoItems(indexToDelete){
             for (let index of indexToDelete) {
-                let buttonSelector = `#todos-container > div:nth-child(${index + 1}) > button`
-                await page.waitForSelector(buttonSelector)
-                await page.click(buttonSelector)
+                let buttonSelector = await page.waitForSelector(`#todos-container > div:nth-child(${index + 1}) > button`)
+                await buttonSelector.click()
                 addedTodos.splice(index, 1)
                 await isTodoItemsCorrectlyRendered(addedTodos)
             }
